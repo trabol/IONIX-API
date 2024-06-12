@@ -6,9 +6,12 @@ import { ConfigModule } from '@nestjs/config';
 
 import { UserModule } from 'src/user/user.module';
 import { User } from 'src/user/entities/user.entity';
+import { Drug } from 'src/drugs/entities/drug.entity';
+
 
 import { AuthModule } from 'src/auth/auth.module';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
+import { DrugsModule } from './drugs/drugs.module';
 
 @Module({
   imports: [
@@ -26,10 +29,11 @@ import { JwtStrategy } from 'src/auth/jwt.strategy';
       // database: process.env.MYSQLDB_DATABASE,
       synchronize: true,
       logging: false,
-      entities: [User],
+      entities: [User,Drug],
     }),
     UserModule,
     AuthModule,
+    DrugsModule,
   ],
   controllers: [],
   providers: [JwtStrategy],
