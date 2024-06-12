@@ -26,3 +26,4 @@ export class Drug {
   vaccinations: Vaccination[];
   
 }
+

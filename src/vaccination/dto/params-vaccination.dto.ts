@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsNumber,
   IsNumberString,
 } from 'class-validator';
 
@@ -11,4 +12,6 @@ export class ParamsVaccinationDto {
   })
   @IsNumberString()
   id: number;
+
+  
 }

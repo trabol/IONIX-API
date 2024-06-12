@@ -25,10 +25,13 @@ export class CreateVaccinationDto {
   name: string
 
   @ApiProperty({
-    example: true,
-    required: true
+    example: 1,
+    required: true,
+    type:Number
   })
-  @IsBoolean()
+  @IsNumber()
+  @Min(1)
+  @Max(1000)
   dose: number
 
   @ApiProperty({
@@ -36,7 +39,6 @@ export class CreateVaccinationDto {
     required: true,
     type:Date
   })
-
   @IsDate()
   @Type(() => Date)
   date: Date;
@@ -49,3 +51,5 @@ export class CreateVaccinationDto {
   @IsNumber()
   drug_id: number
 }
+
+

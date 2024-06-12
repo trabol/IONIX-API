@@ -17,11 +17,10 @@ export class Vaccination {
   @Column({ nullable: false })
   date: Date;
 
-  @ManyToOne(type => Drug)
-  drug_id: number
-
   @ManyToOne(() => Drug, drug => drug.vaccinations, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'drug_id' })
-  drug: Drug;
+  drug:Drug
+  @Column()
+  drug_id: number
 
 }
