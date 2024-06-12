@@ -1,11 +1,13 @@
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UsePipes, ValidationPipe, Put, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body,  Param, Delete, UseGuards, UsePipes, ValidationPipe, Put, HttpStatus, HttpException } from '@nestjs/common';
 
 import { VaccinationService } from './vaccination.service';
 import { CreateVaccinationDto } from './dto/create-vaccination.dto';
 import { UpdateVaccinationDto } from './dto/update-vaccination.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ParamsVaccinationDto } from './dto/params-vaccination.dto';
+
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
 
 
 @ApiBearerAuth()
@@ -35,13 +37,13 @@ export class VaccinationController {
     }
     //dosis dentro del rango
     if (dose < min_dose || dose > max_dose) {
-      throw new HttpException(`dose is not within the allowed rangem, between(${min_dose},${max_dose}).`, HttpStatus.CONFLICT);
+      throw new HttpException(`dose is not within the allowed range, between(${min_dose},${max_dose}).`, HttpStatus.CONFLICT);
     }
     //fecha de droga es posterior
     const date1 = new Date(date);
     const availableAt1 = new Date(available_at);
     if (date1 <= availableAt1) {
-      throw new HttpException(`date vaccination should be later than  available at drug".`, HttpStatus.CONFLICT);
+      throw new HttpException(`date vaccination should be later than available at drug".`, HttpStatus.CONFLICT);
     }
     return this.vaccinationService.create(createVaccinationDto);
   }

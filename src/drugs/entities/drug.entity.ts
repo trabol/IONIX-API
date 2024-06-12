@@ -1,4 +1,4 @@
-import { Vaccination } from 'src/vaccination/entities/vaccination.entity';
+import { Vaccination } from '../../vaccination/entities/vaccination.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 

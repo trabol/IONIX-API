@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Drug } from 'src/drugs/entities/drug.entity';
+import { Drug } from '../../drugs/entities/drug.entity';
 
 @Entity()
 export class Vaccination {
