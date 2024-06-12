@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/user/dto/create.user.dto';
 import { paramsUserDto } from 'src/user/dto/params.user.dto';
 //entities 
-import { User } from 'src/user/entities/user.entity';
+import { User } from './entities/user.entity';
 
 
 @Injectable()

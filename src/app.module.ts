@@ -3,8 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
 
 import { UserModule } from 'src/user/user.module';
 import { User } from 'src/user/entities/user.entity';
@@ -33,8 +31,8 @@ import { JwtStrategy } from 'src/auth/jwt.strategy';
     UserModule,
     AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService,JwtStrategy],
+  controllers: [],
+  providers: [JwtStrategy],
 })
 export class AppModule { }
 

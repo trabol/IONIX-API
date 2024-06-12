@@ -5,12 +5,12 @@ import { Controller, Post, HttpException, HttpStatus, Body, UsePipes, Validation
 import { ApiTags } from '@nestjs/swagger';
 
 //services
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 //dto auth
-import { LoginAuthDto } from 'src/auth/dto/login-auth.dto';
+import { LoginAuthDto } from './dto/login-auth.dto';
 //dto user
-import { CreateUserDto } from 'src/user/dto/create.user.dto';
-import { paramsUserDto } from 'src/user/dto/params.user.dto';
+import { CreateUserDto } from '../user/dto/create.user.dto';
+import { paramsUserDto } from '../user/dto/params.user.dto';
 
 @ApiTags('auth')
 @Controller('auth')
