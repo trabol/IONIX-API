@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Vaccination } from 'src/vaccination/entities/vaccination.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 
 export class Drug {
@@ -20,5 +21,8 @@ export class Drug {
   
   @Column({ nullable: false })
   available_at: Date;
+
+  @OneToMany(() => Vaccination, vaccination => vaccination.drug, { cascade: true })
+  vaccinations: Vaccination[];
   
 }

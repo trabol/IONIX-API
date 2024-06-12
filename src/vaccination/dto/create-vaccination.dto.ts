@@ -14,42 +14,22 @@ import {
   Max,
 } from 'class-validator';
 
-export class CreateDrugDto {
+export class CreateVaccinationDto {
 
   @ApiProperty({
-    example: 'DrugName',
+    example: 'VaccinationName',
     required: true
   })
   @IsString()
   @MaxLength(100)
-  name: string;
+  name: string
 
   @ApiProperty({
     example: true,
     required: true
   })
   @IsBoolean()
-  approved: boolean;
-
-  @ApiProperty({
-    example: 1,
-    required: true,
-    type:Number
-  })
-  @IsNumber()
-  @Min(1)
-  @Max(1000)
-  min_dose: number;
-
-  @ApiProperty({
-    example: 100,
-    required: true,
-    type:Number
-  })
-  @IsNumber()
-  @Min(1)
-  @Max(1000)
-  max_dose: number;
+  dose: number
 
   @ApiProperty({
     example: "2024-06-15",
@@ -59,6 +39,13 @@ export class CreateDrugDto {
 
   @IsDate()
   @Type(() => Date)
-  available_at: Date;
+  date: Date;
 
+  @ApiProperty({
+    example: 1,
+    required: true,
+    type:Number
+  })
+  @IsNumber()
+  drug_id: number
 }
