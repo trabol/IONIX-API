@@ -1,9 +1,10 @@
 
-const minutes = Number(process.env?.JWT_MINUTES_EXPIRE || 1)
+const SECONDS = Number(process.env?.JWT_SECONDS_EXPIRE || 30)
+const SECRET = String(process.env?.JWT_SECRET || "secret");
 
 export const jwtConstants = {
-  secret: String(process.env?.JWT_SECRET || "secret"),
-  expire: minutes * 60
+  secret: SECRET,
+  expire: SECONDS
 }
 
 

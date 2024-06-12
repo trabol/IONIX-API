@@ -1,7 +1,7 @@
 //libreries
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
-import { Controller, Post, HttpException, HttpStatus, Body } from '@nestjs/common';
+import { Controller, Post, HttpException, HttpStatus, Body, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 //services
@@ -24,6 +24,7 @@ export class AuthController {
   }
 
   @Post('/signup')
+  @UsePipes(new ValidationPipe())
   async signup(@Body() register: CreateUserDto) {
 
     const { email } = register;
@@ -37,6 +38,7 @@ export class AuthController {
 
 
   @Post('login')
+  @UsePipes(new ValidationPipe())
   async login(@Body() loginDto: LoginAuthDto) {
     const { email, password } = loginDto;
     let params: paramsUserDto = { email };

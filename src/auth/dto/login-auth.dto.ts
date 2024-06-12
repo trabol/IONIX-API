@@ -9,17 +9,12 @@ import {
 
 export class LoginAuthDto {
 
-  
-  @Transform(({ value }) => value.trim())
-  @MinLength(3, { message: 'email must have atleast 3 characters.' })
-  @MaxLength(100, { message: 'The email allows a maximum of 100 characters.' })
-  @IsEmail(null, { message: 'Please provide valid Email.' })
+  @IsEmail()
+  @MaxLength(100)
   email: string;
-
-
-  @Transform(({ value }) => value.trim())
-  @MinLength(8, { message: 'Password must contain Minimum 8 and maximum 50 characters,' })
-  @MaxLength(50, { message: 'Password must contain Minimum 8 and maximum 50 characters,' })
-
+ 
+  @IsString()
+  @MinLength(3)
+  @MaxLength(100)
   password: string;
 }
