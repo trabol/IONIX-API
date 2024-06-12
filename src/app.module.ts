@@ -1,11 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
-import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+
+
+import { AppController } from 'src/app.controller';
+import { AppService } from 'src/app.service';
+
+import { UserModule } from 'src/user/user.module';
+import { User } from 'src/user/entities/user.entity';
+
+import { AuthModule } from 'src/auth/auth.module';
+import { JwtStrategy } from 'src/auth/jwt.strategy';
 
 @Module({
   imports: [
@@ -22,14 +27,14 @@ import { ConfigModule } from '@nestjs/config';
       // username: process.env.MYSQLDB_USER,
       // database: process.env.MYSQLDB_DATABASE,
       synchronize: true,
-      logging: true,
-      entities: [User], // <----
+      logging: false,
+      entities: [User],
     }),
     UserModule,
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,JwtStrategy],
 })
 export class AppModule { }
 
