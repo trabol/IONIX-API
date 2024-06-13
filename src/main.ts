@@ -1,4 +1,3 @@
-import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';
 
@@ -17,6 +16,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
+  
+  console.log("NODE_PORT",process.env.NODE_PORT);
+  
   await app.listen(process.env.NODE_PORT);
 }
 bootstrap();
