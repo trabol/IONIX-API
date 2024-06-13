@@ -2,8 +2,11 @@ version: "3.8"
 
 services:
   mysqldb:
-    image: mysql:8.0.32-oracle:alpine
+    image: mysql:8.0
     env_file: ./.env
+    cap_add:
+      - SYS_NICE
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD
     ports:
@@ -11,7 +14,8 @@ services:
     networks:                             
       - test-network
     volumes:
-      - db_data:/var/lib/mysql
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   app:
     depends_on:
@@ -31,7 +35,8 @@ services:
     #command: sh -c "npm install && npm run dev"
 
 volumes:
-  db_data:
+  db:
+    driver: local
 
 networks:                        
   test-network:      
