@@ -26,7 +26,6 @@ export class AuthController {
   @Post('/signup')
   @UsePipes(new ValidationPipe())
   async signup(@Body() register: CreateUserDto) {
-
     const { email } = register;
     const params: paramsUserDto = { email };
     const exists = await this.userService.findByParams(params);

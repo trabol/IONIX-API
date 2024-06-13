@@ -1,43 +1,53 @@
-version: "3.8"
+version: '3.8'
+
+networks:
+  pledge_network:
+    driver: bridge
 
 services:
-  mysqldb:
-    image: mysql:8.0
-    env_file: ./.env
-    cap_add:
-      - SYS_NICE
-    restart: always
+  # pledge:
+  #   container_name: pledge
+  #   build: .
+  #   environment:
+  #     NODE_ENV: ${NODE_ENV}
+  #     PORT: ${NODE_PORT}
+  #     DB_PORT: ${DB_PORT}
+  #     DB_HOST: ${DB_HOST}
+  #     DB_NAME: ${DB_NAME}
+  #     DB_USER: ${DB_USER}
+  #     DB_PASS: ${DB_PASS}
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ${NODE_PORT}:${NODE_PORT}
+  #   expose:
+  #     - ${NODE_PORT}
+  #   volumes:
+  #     - ./:/usr/src/app
+  #   command: npm run start:dev
+  #   depends_on:
+  #     - host-db
+  #   networks:
+  #     - pledge_network
+
+  host-db:
+    container_name: host-db
+    image: postgres:15
+    volumes:
+       - postgres-db-volume:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
     ports:
-      - $MYSQL_DOCKER_PORT:$MYSQL_DOCKER_PORT
-    networks:                             
-      - test-network
-    volumes:
-      - db:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-  app:
-    depends_on:
-      - mysqldb
-    links:
-      - mysqldb
-    build: .
-    restart: unless-stopped
-    env_file: ./.env
-    ports:
-      - $NODE_PORT:$NODE_PORT
-    volumes:
-      - .:/usr/src/app
-    networks:                             
-      - test-network
-
-    #command: sh -c "npm install && npm run dev"
+      - ${DB_PORT}:${DB_PORT}
+    restart: on-failure
+    networks:
+      - pledge_network
 
 volumes:
-  db:
-    driver: local
-
-networks:                        
-  test-network:      
-    driver: bridge
+    postgres-db-volume:
+        driver: local
+        

@@ -15,10 +15,13 @@ async function bootstrap() {
   .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
+  
+  console.log("host:", process.env.DB_HOST),
+  console.log("port:", Number(process.env.DB_PORT));
+  console.log("password:",  String(process.env.DB_PASS))
+  console.log("username:", process.env.DB_USER)
+  console.log("database:", process.env.DB_NAME)
 
-  
-  console.log("NODE_PORT",process.env.NODE_PORT);
-  
   await app.listen(process.env.NODE_PORT);
 }
 bootstrap();
