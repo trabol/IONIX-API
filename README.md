@@ -43,7 +43,9 @@ $ npm run test
 
 ```
 
-## Swagger
+## Swagger Documentacion
 ir al url
 
 http://localhost:8081/docs#/
+
+![image](https://github.com/trabol/IONIX-API/assets/14164927/16bad23f-6cf9-4267-a8a7-ef5451d9bc8a)
